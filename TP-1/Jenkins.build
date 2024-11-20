@@ -9,7 +9,7 @@ pipeline {
   stages {
     stage('Cloning Git') {
       steps {
-        git branch: 'main', credentialsId: 'myid', url: '......'
+        git branch: 'main', credentialsId: 'Git', url: 'https://github.com/CloNTCL/DevopsAndConDep'
       }
     }
     stage('Building backend image') {
@@ -25,7 +25,7 @@ pipeline {
     stage('Publish backend Image') {
       steps {
         script {
-          withDockerRegistry(credentialsId: 'DockerHubEfrei') {
+          withDockerRegistry(credentialsId: 'DockerHub') {
             backendImage.push()
           }
 
@@ -46,7 +46,7 @@ pipeline {
     stage('Publish frontend Image') {
       steps {
         script {
-          withDockerRegistry(credentialsId: 'DockerHubEfrei') {
+          withDockerRegistry(credentialsId: 'DockerHub') {
             frontendImage.push()
           }
         }
